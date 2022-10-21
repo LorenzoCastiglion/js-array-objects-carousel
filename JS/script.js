@@ -60,16 +60,16 @@ const images = [
 
 const btmCarousel = document.getElementById('btm-carousel');
 const topCarousel = document.getElementById('top-carousel');
-
+const mainImage = document.createElement('div');
 
 // creazione ciclo che cicli l'array 
 
 
 images.forEach(element => {
 
-    const mainImage = document.createElement('div');
-    mainImage.classList.add('position-relative');
-
+    
+    mainImage.classList.add('position-relative', 'd-none');
+    
     mainImage.innerHTML = `
             <img src="${element.url}" alt="${element.title}">
             <div class="didascalia px-3">
@@ -77,14 +77,24 @@ images.forEach(element => {
             <div class="top-right">${element.description}</div>
             </div>
           `   ;
-    topCarousel.append(mainImage);
+       
+          topCarousel.append(mainImage);
+
+        //   var interval = 2000; 
+        //   images.forEach(element => {
+        //       setInterval(function () {
+        //         mainImage.classList.toggle('d-none')
+        //       }, interval);
+        //     });
 
 });
+
+
 
 images.forEach(element => {
 
     const miniImage = document.createElement('div')
-    miniImage.classList.add('col', 'p-1')
+    miniImage.classList.add('col' , 'p-0')
     miniImage.innerHTML = `
             <img class="w-100 h-100 " src="${element.url}" alt="${element.title}">
           `
@@ -93,12 +103,35 @@ images.forEach(element => {
 });
 
 
-        // var interval = 1000; // how much time should the delay between two iterations be (in milliseconds)?
-        // array.forEach(function (el, index) {
-        //   setTimeout(function () {
-        //     console.log(el);
-        //   }, index * interval);
-        // });
+let array = images,
+    intervalDurationMs = 3000,
+    currentIndex = 0,
+    maxNumTimes = -1,
+    numTimesRan = 0;
+
+let interval = setInterval(function() {
+    if (maxNumTimes !== 0) {
+        
+        console.log(array[currentIndex]);
+        currentIndex++;
+        if (currentIndex > array.length-1) {
+            if (maxNumTimes === -1) {
+                currentIndex = 0;
+            } else {
+                numTimesRan++;
+                if (numTimesRan === maxNumTimes) {
+                    clearInterval(interval);
+                } else {
+                    currentIndex = 0;
+                }
+            }
+        }
+    } else {
+        clearInterval(interval);
+    }
+}, intervalDurationMs);
+
+console.log(array);
 
 
 // Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
