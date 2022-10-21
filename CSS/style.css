@@ -1,0 +1,32 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Raleway:wght@400;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+}
+
+img{
+    width: 100%;
+    
+}
+
+.didascalia{
+    margin-top: 1rem;
+    position: absolute;
+    text-align: end;
+    top: 0;
+    color: white;
+    
+}
+
+h1{
+    font-family: 'Alfa Slab One', cursive;   
+    
+}
