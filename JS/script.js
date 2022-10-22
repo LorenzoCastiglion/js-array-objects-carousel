@@ -68,17 +68,24 @@ function initSlides (){
     let foto = document.querySelectorAll('.big-pic');
     foto[0].classList.toggle('d-none');  
     foto[0].classList.toggle('show');  
-    
   }
+
+  function opacity () {
+    let fotosmall = document.querySelectorAll('.small-pic');
+    fotosmall[0].classList.toggle('opacity-50');  
+    fotosmall[0].classList.toggle('show-mini');  
+  }
+  
  
   console.log(topCarousel)
   console.log(topCarousel.firstChild)
   setInterval(() => {
+
+    // scorrimento top slides
     let foto = document.getElementsByClassName('show')[0];
     foto.classList.toggle('d-none');
     console.log(foto.classList);
     foto.classList.toggle( 'show');
-
     let nextSlide = foto.nextElementSibling;
      if(nextSlide === null){
         nextSlide = topCarousel.firstChild;
@@ -86,9 +93,27 @@ function initSlides (){
     nextSlide.classList.toggle('d-none');
     nextSlide.classList.toggle( 'show');
 
+    // scorrimento bottom slides
+    let fotoMini = document.getElementsByClassName('show-mini')[0];
+    fotoMini.classList.toggle('opacity-50');
+    
+    fotoMini.classList.toggle( 'show-mini');
+    let nextMini = fotoMini.nextElementSibling;
+     nextMini = fotoMini.nextElementSibling;
+     if(nextMini === null){
+        nextMini = btmCarousel.firstChild;
+    }
+    nextMini.classList.toggle('opacity-50');
+    nextMini.classList.toggle( 'show-mini');
+
+
+
   }, interval);
 
 // creazione ciclo che cicli l'array 
+
+
+// dare una var alllphoto e una var photo riassegnare in base al counter index
 
 images.forEach(element => {
     let mainImage = document.createElement('div');
@@ -112,8 +137,9 @@ console.log(topCarousel.firstChild)
 
 images.forEach(element => {
 
-    const miniImage = document.createElement('div')
-    miniImage.classList.add('col' , 'p-0')
+    let miniImage = document.createElement('div')
+    
+    miniImage.classList.add('col' , 'p-0', 'small-pic', 'opacity-50')
     miniImage.innerHTML = `
             <img class="w-100 h-100 " src="${element.url}" alt="${element.title}">
           `
@@ -122,7 +148,7 @@ images.forEach(element => {
 });
 
 
-
+opacity();
 
 
 
