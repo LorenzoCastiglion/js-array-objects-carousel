@@ -60,16 +60,40 @@ const images = [
 
 const btmCarousel = document.getElementById('btm-carousel');
 const topCarousel = document.getElementById('top-carousel');
-const mainImage = document.createElement('div');
+
+let interval = 2500;
+
+
+function initSlides (){
+    let foto = document.querySelectorAll('.big-pic');
+    foto[0].classList.toggle('d-none');  
+    foto[0].classList.toggle('show');  
+    
+  }
+ 
+  console.log(topCarousel)
+  console.log(topCarousel.firstChild)
+  setInterval(() => {
+    let foto = document.getElementsByClassName('show')[0];
+    foto.classList.toggle('d-none');
+    console.log(foto.classList);
+    foto.classList.toggle( 'show');
+
+    let nextSlide = foto.nextElementSibling;
+     if(nextSlide === null){
+        nextSlide = topCarousel.firstChild;
+    }
+    nextSlide.classList.toggle('d-none');
+    nextSlide.classList.toggle( 'show');
+
+  }, interval);
 
 // creazione ciclo che cicli l'array 
 
-
 images.forEach(element => {
+    let mainImage = document.createElement('div');
+    mainImage.classList.add('position-relative', 'd-none', 'big-pic');
 
-    
-    mainImage.classList.add('position-relative', 'd-none');
-    
     mainImage.innerHTML = `
             <img src="${element.url}" alt="${element.title}">
             <div class="didascalia px-3">
@@ -77,19 +101,14 @@ images.forEach(element => {
             <div class="top-right">${element.description}</div>
             </div>
           `   ;
-       
-          topCarousel.append(mainImage);
-
-        //   var interval = 2000; 
-        //   images.forEach(element => {
-        //       setInterval(function () {
-        //         mainImage.classList.toggle('d-none')
-        //       }, interval);
-        //     });
-
+          topCarousel.append(mainImage);    
 });
 
+initSlides();
 
+
+console.log(topCarousel)
+console.log(topCarousel.firstChild)
 
 images.forEach(element => {
 
@@ -103,35 +122,12 @@ images.forEach(element => {
 });
 
 
-let array = images,
-    intervalDurationMs = 3000,
-    currentIndex = 0,
-    maxNumTimes = -1,
-    numTimesRan = 0;
 
-let interval = setInterval(function() {
-    if (maxNumTimes !== 0) {
-        
-        console.log(array[currentIndex]);
-        currentIndex++;
-        if (currentIndex > array.length-1) {
-            if (maxNumTimes === -1) {
-                currentIndex = 0;
-            } else {
-                numTimesRan++;
-                if (numTimesRan === maxNumTimes) {
-                    clearInterval(interval);
-                } else {
-                    currentIndex = 0;
-                }
-            }
-        }
-    } else {
-        clearInterval(interval);
-    }
-}, intervalDurationMs);
 
-console.log(array);
+
+
+
+
 
 
 // Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
